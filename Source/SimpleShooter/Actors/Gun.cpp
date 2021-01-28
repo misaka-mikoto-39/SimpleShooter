@@ -49,7 +49,7 @@ void AGun::PullTrigger()
 	FRotator PlayerRotation;
 	OwnerController->GetPlayerViewPoint(PlayerLocation, PlayerRotation);
 	FVector End = PlayerLocation + PlayerRotation.Vector() * MaxRange;
-	PlayerLocation = GetActorLocation() + PlayerRotation.Vector() * 90;
+	//PlayerLocation = GetActorLocation() + PlayerRotation.Vector() * 90;
 
 	FHitResult Hit;
 	bool IsSuccess = GetWorld()->LineTraceSingleByChannel(Hit, PlayerLocation, End, ECollisionChannel::ECC_GameTraceChannel1);
@@ -57,6 +57,12 @@ void AGun::PullTrigger()
 	{
 		FVector ShotDirection = -PlayerRotation.Vector();
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitFlash, Hit.Location, ShotDirection.Rotation());
+		AActor* HitActor = Hit.GetActor();
+		if (HitActor)
+		{
+			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
+			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		}
 	}
 }
 

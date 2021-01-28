@@ -29,20 +29,33 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-private:
-	// PROPERTIES
-	UPROPERTY(EditAnywhere)
-		float RotationRate = 70.0f;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	UFUNCTION(BlueprintPure)
+		bool IsDead() const;
+private:
+	// COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Componenets", meta = (AllowPrivateAccess = "true"))
 		USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Componenets", meta = (AllowPrivateAccess = "true"))
 		UCameraComponent* Camera;
+	
+	// PROPERTIES
+	UPROPERTY(EditAnywhere)
+		float RotationRate = 70.0f;
+
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AGun> GunClass;
+
 	UPROPERTY()
 		AGun* Gun;
+	
+	UPROPERTY(EditDefaultsOnly)
+		float MaxHealth = 100;
+	UPROPERTY(VisibleAnywhere)
+		float Health;
 
 	// FUNCTIONS
 	void MoveForward(float AxisValue);
