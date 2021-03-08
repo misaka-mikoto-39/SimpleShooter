@@ -19,7 +19,9 @@ public:
 protected: 
 	virtual void BeginPlay() override;
 private:
+	/*UPROPERTY(EditAnywhere)
+		float AcceptanceRadius = 300;*/
 	UPROPERTY(EditAnywhere)
-		float AcceptanceRadius = 300;
+		class UBehaviorTree* AIBehavior;
 };
 
