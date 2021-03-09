@@ -34,6 +34,8 @@ public:
 
 	UFUNCTION(BlueprintPure)
 		bool IsDead() const;
+
+	void Shoot();
 private:
 	// COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Componenets", meta = (AllowPrivateAccess = "true"))
@@ -62,6 +64,5 @@ private:
 	void MoveRight(float AxisValue);
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
-	void Shoot();
 
 };
