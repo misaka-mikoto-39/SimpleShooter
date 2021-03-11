@@ -4,6 +4,17 @@
 #include "ShooterAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BlackBoardComponent.h"
+#include "SimpleShooter/Characters/ShooterCharacter.h"
+
+bool AShooterAIController::IsDead() const
+{
+	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(GetPawn());
+	if (ControlledCharacter != nullptr)
+	{
+		return ControlledCharacter->IsDead();
+	}
+	return true;
+}
 
 void AShooterAIController::BeginPlay()
 {
