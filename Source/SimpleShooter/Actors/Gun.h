@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Gun.generated.h"
 
+
 UCLASS()
 class SIMPLESHOOTER_API AGun : public AActor
 {
@@ -35,10 +36,19 @@ private:
 		UParticleSystem* MuzzleFlash;
 
 	UPROPERTY(EditAnywhere)
-	UParticleSystem* HitFlash;
+		USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere)
+		UParticleSystem* HitFlash;
+
+	UPROPERTY(EditAnywhere)
+		USoundBase* HitSound;
 
 	UPROPERTY(EditAnywhere)
 		float MaxRange = 10000; 
 	UPROPERTY(EditAnywhere)
 		float Damage = 10;
+
+	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
+	AController* GetOwnerController() const;
 };
